@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="container">
+        <h2>Criar cartão para revisão</h2>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <form method="POST" action="" class="border p-4 mt-2">
+                    {{ form_criarcartao.csrf_token }}
+                    <legend>Cartão</legend>
+                    <fieldset>
+                        <div class="form-group">
+                            {{ form_criarcartao.frente.label(class="form-control-label") }}
+                            {% if form_criarcartao.frente.errors %}
+                                {{ form_criarcartao.frente(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_criarcartao.frente.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                                {{ form_criarcartao.frente(class="form-control") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ form_criarcartao.verso.label(class="form-control-label") }}
+                            {% if form_criarcartao.verso.errors %}
+                                {{ form_criarcartao.verso(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_criarcartao.verso.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                                {{ form_criarcartao.verso(class="form-control") }}
+                            {% endif %}
+                        </div>
+
+                    </fieldset>
+                    {{ form_criarcartao.botao_submit_criarcartao(class="btn btn-primary mt-2") }}
+                   <a class="btn btn-danger" href="{{url_for('cartao_lista')}}">Listar cartões</a>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

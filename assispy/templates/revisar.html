@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block body %}
+ <div class="container">
+
+
+       <p id="timer">00:00:00</p>
+       <button id="start" class="btn btn-info">Iniciar</button>
+       <button id="stop" class="btn btn-info">Pausar</button>
+        <button class="btn btn-info" id="resetar" ><a style="text-decoration: none" href="{{url_for('tarefa')}}">Resetar</a></button>
+
+
+
+       <script>
+           let timer;
+           let seconds = 0;
+
+           function updateTimer() {
+               const hours = Math.floor(seconds / 3600);
+               const minutes = Math.floor((seconds % 3600) / 60);
+               const remainingSeconds = seconds % 60;
+               document.getElementById("timer").innerText = `${hours}:${minutes}:${remainingSeconds}`;
+               seconds++;
+           }
+
+           document.getElementById("start").addEventListener("click", function() {
+               timer = setInterval(updateTimer, 1000);
+           });
+
+           document.getElementById("stop").addEventListener("click", function() {
+               clearInterval(timer);
+           });
+       </script>
+
+        <div style="margin-top: 50px;" class="container">
+        <h1 class="text-center">Revisar Cartões</h1>
+
+        <form class="mt-5" action="/add" method="post">
+            <div class="form-group">
+                <label for="nome">Verso</label>
+                <input type="text" class="form-control" id="nome" name="nome"  >
+            </div>
+
+        </form>
+
+        <hr>
+
+        <div class="card mt-3">
+            <div class="card-body">
+
+               <a class="btn btn-danger" href="#">Não Lembro</a>
+                <a class="btn btn-success" href="#}">Acertei</a>
+                <a class="btn btn-info" href="#">Voltar</a>
+                <a class="btn btn-info" href="#">Proximo</a>
+            </div>
+
+        </div>
+
+
+    </div>
+{% endblock %}

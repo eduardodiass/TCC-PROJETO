@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block body %}
+ <div class="container">
+        <div style="margin-top: 50px;" class="container">
+        <h1 class="text-center">Histórico Revisões</h1>
+            <button class="btn btn-primary" type="submit"><a href="{{url_for('historico')}}" Add</button>
+        </form>
+
+        <hr>
+
+
+        <div class="card mt-3">
+            <div class="card-body">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th ="col">#</th>
+                      <th scope="col">First</th>
+                      <th scope="col">Last</th>
+                      <th scope="col">Handle</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                   {% for historico in historico_lista %}
+                        <tr>
+                          <th scope="row">1</th>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">2</th>
+                          <td>Jacob</td>
+                          <td>Thornton</td>
+                          <td>@fat</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">3</th>
+                          <td colspan="2">Larry the Bird</td>
+                          <td>@twitter</td>
+                        </tr>
+                      </tbody>
+                    {% endfor %}
+                </table>
+
+
+
+
+                <h5 class="card-title">{{historico.id }} | {{ historico.nome }}| {{ historico.prioridade }}</h5>
+
+                {% if tarefa.concluida == False %}
+                    <span class="badge text-bg-warning">Não concluída</span>
+                {% else %}
+                    <span class="badge text-bg-success">Concluída</span>
+                {% endif %}
+
+                <a class="btn btn-info" href="/update/{{ tarefa.id }}">Update</a>
+                <a class="btn btn-danger" href="/delete/{{ tarefa.id }}">Delete</a>
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

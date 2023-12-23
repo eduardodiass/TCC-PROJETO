@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block body %}
+
+    <div class="container mt-3">
+
+
+       <p id="timer">00:00:00</p>
+       <button id="start" class="btn btn-info">Iniciar</button>
+       <button id="stop" class="btn btn-info">Pausar</button>
+        <button class="btn btn-info" id="resetar" ><a style="text-decoration: none" href="{{url_for('tarefa')}}">Resetar</a></button>
+
+
+
+       <script>
+           let timer;
+           let seconds = 0;
+
+           function updateTimer() {
+               const hours = Math.floor(seconds / 3600);
+               const minutes = Math.floor((seconds % 3600) / 60);
+               const remainingSeconds = seconds % 60;
+               document.getElementById("timer").innerText = `${hours}:${minutes}:${remainingSeconds}`;
+               seconds++;
+           }
+
+           document.getElementById("start").addEventListener("click", function() {
+               timer = setInterval(updateTimer, 1000);
+           });
+
+           document.getElementById("stop").addEventListener("click", function() {
+               clearInterval(timer);
+           });
+       </script>
+        <h2 class="text-center mb-3">Assistente Virtual</h2>
+          <div class="card overflow-auto mx-3" style="height: 400px">
+            <div class="card-body">
+                {% for c in conversa %}
+                    <p>{{c}}</p>
+                {% endfor %}
+
+            </div>
+        </div>
+        <form action="/assistente" method="POST">
+            <div class="d-flex">
+                <input type="text" style="background:#CFCFCF " class="form-control mt-3 mx-3 w-75" name="pergunta">
+                <button  class="btn btn-primary mt-3 w-25 h-75 b-3" type="submit">Enviar</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="container">
+        {% for cartao in cartao_lista %}
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{cartao.id }} | Frente: {{ cartao.frente }}| Verso: {{ cartao.verso }}</h5>
+                        <a class="btn btn-info" href="{{url_for('editar_cartao'), cartao_id=cartao.id)}}">Update</a>
+                        <a class="btn btn-danger" href="{{cartao.id)}}">Delete</a>
+                         <a class="btn btn-danger" href="{{url_for('cartao_add')}}">Adicionar</a>
+
+                    </div>
+                </div>
+        {% endfor %}
+    </div>
+{% endblock %}
